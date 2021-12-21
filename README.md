@@ -183,7 +183,7 @@ esptool.py --chip esp32 --port /dev/ttyUSB0 \
 -z --flash_mode dio --flash_freq 40m --flash_size detect \
 0x1000 build/bootloader/bootloader.bin \
 0x10000 build/esp32_nat_router.bin \
-0x8000 build/partitions_example.bin
+0x8000 build/partition_table/partition-table.bin
 ```
 
 As an alternative you might use [Espressif's Flash Download Tools](https://www.espressif.com/en/products/hardware/esp32/resources) with the parameters given in the figure below (thanks to mahesh2000):

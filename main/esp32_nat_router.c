@@ -400,6 +400,7 @@ void wifi_init(const char* ssid, const char* passwd, const char* static_ip, cons
             .ssid_hidden = 0,
             .max_connection = 8,
             .beacon_interval = 100,
+            .pairwise_cipher = WIFI_CIPHER_TYPE_CCMP,
         }
     };
 
@@ -413,6 +414,9 @@ void wifi_init(const char* ssid, const char* passwd, const char* static_ip, cons
     if (strlen(ssid) > 0) {
         strlcpy((char*)wifi_config.sta.ssid, ssid, sizeof(wifi_config.sta.ssid));
         strlcpy((char*)wifi_config.sta.password, passwd, sizeof(wifi_config.sta.password));
+        wifi_config.sta.threshold.authmode = WIFI_AUTH_WPA2_PSK;
+        wifi_config.sta.pmf_cfg.capable = true;
+        wifi_config.sta.pmf_cfg.required = false;
         ESP_ERROR_CHECK(esp_wifi_set_mode(WIFI_MODE_APSTA) );
         ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config) );
         ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_AP, &ap_config) );
